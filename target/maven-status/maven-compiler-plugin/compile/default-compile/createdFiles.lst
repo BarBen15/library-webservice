@@ -1,0 +1,15 @@
+ch\fincons\library\Application.class
+ch\fincons\library\config\MessageConfig.class
+ch\fincons\library\exception\ErrorResponse.class
+ch\fincons\library\repository\ArticoliRepository.class
+ch\fincons\library\entities\Barcode.class
+ch\fincons\library\exception\RestExceptionHandler.class
+ch\fincons\library\controller\ArticoliController.class
+ch\fincons\library\exception\NotFoundException.class
+ch\fincons\library\config\SwaggerConfig.class
+ch\fincons\library\controller\InfoMsg.class
+ch\fincons\library\exception\BindingException.class
+ch\fincons\library\service\ArticoliServiceImpl.class
+ch\fincons\library\service\ArticoliService.class
+ch\fincons\library\entities\Articoli.class
+ch\fincons\library\exception\DuplicateException.class

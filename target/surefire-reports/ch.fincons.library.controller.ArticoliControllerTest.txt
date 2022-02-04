@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ch.fincons.library.controller.ArticoliControllerTest
+-------------------------------------------------------------------------------
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 31.503 s - in ch.fincons.library.controller.ArticoliControllerTest

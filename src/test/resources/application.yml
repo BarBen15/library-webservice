@@ -1,0 +1,28 @@
+# ==============================================================
+# = Articoli Web Service - Versione Base
+# ==============================================================
+
+server:
+  port: 5051
+
+spring:
+  application:
+    name: LibraryWebService
+
+# ==============================================================
+# = DBMS H2 Parameters
+# ==============================================================
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:librarydevdb;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+
+
+
+  
+

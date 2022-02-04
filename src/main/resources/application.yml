@@ -1,0 +1,14 @@
+# ==============================================================
+# = Library Web Service -
+# ==============================================================
+
+#server:
+#  port: 5051
+
+spring:
+  application:
+    name: LibraryWebService
+  profiles:
+    active: dev
+  
+

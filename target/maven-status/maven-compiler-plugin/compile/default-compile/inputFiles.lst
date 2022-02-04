@@ -1,0 +1,15 @@
+C:\workspace\intellij\src\main\java\ch\fincons\library\exception\RestExceptionHandler.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\exception\NotFoundException.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\controller\ArticoliController.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\service\ArticoliServiceImpl.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\exception\DuplicateException.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\Application.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\entities\Barcode.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\service\ArticoliService.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\repository\ArticoliRepository.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\exception\BindingException.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\controller\InfoMsg.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\config\MessageConfig.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\config\SwaggerConfig.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\exception\ErrorResponse.java
+C:\workspace\intellij\src\main\java\ch\fincons\library\entities\Articoli.java
