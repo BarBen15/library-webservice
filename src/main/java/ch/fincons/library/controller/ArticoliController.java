@@ -4,7 +4,7 @@ import ch.fincons.library.entities.Articoli;
 import ch.fincons.library.exception.BindingException;
 import ch.fincons.library.exception.DuplicateException;
 import ch.fincons.library.exception.NotFoundException;
-import ch.fincons.library.service.ArticoliService;
+import ch.fincons.library.exception.service.ArticoliService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.annotations.*;
@@ -37,6 +37,40 @@ public class ArticoliController
 	@Autowired
 	private ResourceBundleMessageSource errMessage;
 
+
+	// ------------------- Ricerca Per Barcode ------------------------------------
+	@ApiOperation(
+			value = "Ricerca tutti gli articoli",
+			notes = "Restituisce i dati deli articoli in formato JSON",
+			response = Articoli.class,
+			produces = "application/json")
+	@ApiResponses(value =
+			{   @ApiResponse(code = 200, message = "Articoli trovati!"),
+				@ApiResponse(code = 404, message = "Nessun articolo presente!"),
+				@ApiResponse(code = 403, message = "Non sei AUTORIZZATO ad accedere alle informazioni"),
+				@ApiResponse(code = 401, message = "Non sei AUTENTICATO")
+			})
+	@GetMapping(value = "/cerca", produces = "application/json")
+	public ResponseEntity<List<Articoli>> listAllArticoli() throws NotFoundException
+	{
+		log.info(String.format("****** Articoli presenti nel sistema *******") );
+
+		List<Articoli> articoli = articoliService.findAll();
+
+		if (articoli.isEmpty())
+		{
+			String ErrMsg = String.format("Articoli non presenti nel sistema");
+
+			log.warning(ErrMsg);
+
+			throw new NotFoundException(ErrMsg);
+
+			//return new ResponseEntity<Articoli>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<List<Articoli>>(articoli, HttpStatus.OK);
+	}
+
 	
 	// ------------------- Ricerca Per Barcode ------------------------------------
 	@ApiOperation(
@@ -55,7 +89,7 @@ public class ArticoliController
 	{
 		log.info(String.format("****** Otteniamo l'articolo con barcode %s *******", Barcode) );
 		
-		Articoli articolo = articoliService.SelByBarcode(Barcode);
+		Articoli articolo = articoliService.selByBarcode(Barcode);
 		
 		if (articolo == null)
 		{
@@ -88,7 +122,7 @@ public class ArticoliController
 	{
 		log.info(String.format("****** Otteniamo l'articolo con codice %s *******", CodArt));
 
-		Articoli articolo = articoliService.SelByCodArt(CodArt);
+		Articoli articolo = articoliService.selByCodArt(CodArt);
 
 		if (articolo == null)
 		{
@@ -119,7 +153,7 @@ public class ArticoliController
 	{
 		log.info(String.format("****** Otteniamo gli articoli con Descrizione: %s *******",Filter));
 		
-		List<Articoli> articoli = articoliService.SelByDescrizione(Filter + "%");
+		List<Articoli> articoli = articoliService.selByDescrizione(Filter + "%");
 		
 		if (articoli.size() == 0)
 		{
@@ -161,7 +195,7 @@ public class ArticoliController
 		}
 		 
 		//Disabilitare se si vuole gestire anche la modifica 
-		Articoli checkArt =  articoliService.SelByCodArt(articolo.getCodArt());
+		Articoli checkArt =  articoliService.selByCodArt(articolo.getCodArt());
 
 		if (checkArt != null)
 		{
@@ -179,7 +213,7 @@ public class ArticoliController
 
 		ObjectNode responseNode = mapper.createObjectNode();
 		
-		articoliService.InsArticolo(articolo);
+		articoliService.insArticolo(articolo);
 		
 		responseNode.put("code", HttpStatus.OK.toString());
 		responseNode.put("message", "Inserimento Articolo " + articolo.getCodArt() + " Eseguito Con Successo");
@@ -213,7 +247,7 @@ public class ArticoliController
 			throw new BindingException(MsgErr);
 		}
 		
-		Articoli checkArt =  articoliService.SelByCodArt(articolo.getCodArt());
+		Articoli checkArt =  articoliService.selByCodArt(articolo.getCodArt());
 
 		if (checkArt == null)
 		{
@@ -231,7 +265,7 @@ public class ArticoliController
 
 		ObjectNode responseNode = mapper.createObjectNode();
 		
-		articoliService.InsArticolo(articolo);
+		articoliService.insArticolo(articolo);
 		
 		responseNode.put("code", HttpStatus.OK.toString());
 		responseNode.put("message", "Modifica Articolo " + articolo.getCodArt() + " Eseguita Con Successo");
@@ -254,7 +288,7 @@ public class ArticoliController
 	{
 		log.info(String.format("Eliminiamo l'articolo con codice %s", CodArt));
 		
-		Articoli articolo = articoliService.SelByCodArt(CodArt);
+		Articoli articolo = articoliService.selByCodArt(CodArt);
 
 		if (articolo == null)
 		{
@@ -265,7 +299,7 @@ public class ArticoliController
 			throw new NotFoundException(MsgErr);
 		}
 		
-		articoliService.DelArticolo(articolo);
+		articoliService.delArticolo(articolo);
 		
 		String code = HttpStatus.OK.toString();
 		String message = String.format("Eliminazione Articolo %s Eseguita Con Successo", CodArt);

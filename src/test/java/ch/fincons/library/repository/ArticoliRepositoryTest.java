@@ -31,16 +31,16 @@ public class ArticoliRepositoryTest
 	@Order(1)
 	public void TestInsArticolo()
 	{
-		Articoli articolo = new Articoli("12346","Articolo di Test",50,new Date(2014, 02, 11));
+		Articoli articolo = new Articoli("10001","Articolo di Test",50,new Date(2014, 02, 11));
 
 		Set<Barcode> Eans = new HashSet<>();
-		Eans.add(new Barcode("12345678", "CD", articolo));
+		Eans.add(new Barcode("10000001", "Libro", articolo));
 		
 		articolo.setBarcode(Eans);
-		
+
 		articoliRepository.save(articolo);
-		
-		assertThat(articoliRepository.findByCodArt("12346"))
+
+		assertThat(articoliRepository.findByCodArt("10001"))
 		.extracting(Articoli::getDescrizione)
 		.isEqualTo("Articolo di Test");
 	}
@@ -57,7 +57,7 @@ public class ArticoliRepositoryTest
 	@Order(3)
 	public void TestfindByEan() throws Exception
 	{
-		assertThat(articoliRepository.SelByEan("12345678"))
+		assertThat(articoliRepository.selByEan("10000001"))
 				.extracting(Articoli::getDescrizione)
 				.isEqualTo("Articolo di Test");
 				
@@ -67,7 +67,7 @@ public class ArticoliRepositoryTest
 	@Order(4)
 	public void TestDelArticolo()
 	{
-		Articoli articolo = articoliRepository.findByCodArt("12346");
+		Articoli articolo = articoliRepository.findByCodArt("10001");
 		
 		articoliRepository.delete(articolo);
 		

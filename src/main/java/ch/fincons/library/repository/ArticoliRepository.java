@@ -15,6 +15,6 @@ public interface ArticoliRepository extends JpaRepository<Articoli,String>
 	
 	//JPQL
 	@Query(value="SELECT a FROM Articoli a JOIN a.barcode b WHERE b.barcode IN (:ean)")
-	Articoli SelByEan(@Param("ean") String ean);
+	Articoli selByEan(@Param("ean") String ean);
 
 }

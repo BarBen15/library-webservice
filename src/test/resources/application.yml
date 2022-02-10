@@ -8,8 +8,15 @@ server:
 spring:
   application:
     name: LibraryWebService
+  profiles:
+    active: dev
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
-# ==============================================================
+  # ==============================================================
 # = DBMS H2 Parameters
 # ==============================================================
   h2:
@@ -21,8 +28,4 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
-
-
-
-  
 

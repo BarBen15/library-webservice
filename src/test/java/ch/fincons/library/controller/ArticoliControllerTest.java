@@ -6,11 +6,13 @@ import ch.fincons.library.repository.ArticoliRepository;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -23,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+//@AutoConfigureMockMvc
 @ContextConfiguration(classes = Application.class)
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -63,7 +66,7 @@ class ArticoliControllerTest {
     @Order(1)
     void testListArtByEan() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/ean/800849")
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 //articoli
@@ -91,9 +94,9 @@ class ArticoliControllerTest {
     public void testErrlistArtByEan() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/ean/" + Barcode)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JsonData)
-                        .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonData)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.codice").value(404))
                 .andExpect(jsonPath("$.messaggio").value("Il barcode " + Barcode + " non è stato trovato!"))
@@ -105,10 +108,12 @@ class ArticoliControllerTest {
     public void testListArtByCodArt() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/codice/2000301")
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(JsonData))
+                .andExpect(jsonPath("codArt").value("2000301"))
+                .andDo(print())
                 .andReturn();
     }
 
@@ -119,9 +124,9 @@ class ArticoliControllerTest {
     public void testErrlistArtByCodArt() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/codice/" + codArt)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JsonData)
-                        .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonData)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.codice").value(404))
                 .andExpect(jsonPath("$.messaggio").value("L'articolo con codice " + codArt + " non è stato trovato!"))
@@ -135,7 +140,7 @@ class ArticoliControllerTest {
     public void testListArtByDesc() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/descrizione/PINOCCHIO")
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -150,7 +155,7 @@ class ArticoliControllerTest {
         String Filter = "123ABC";
 
         mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca/descrizione/" + Filter)
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.codice").value(404))
                 .andExpect(jsonPath("$.messaggio").value("Non è stato trovato alcun articolo avente descrizione " + Filter))
@@ -226,9 +231,9 @@ class ArticoliControllerTest {
     public void testErrInsArticolo() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.post(ApiBaseUrl + "/inserisci")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(ErrJsonData)
-                        .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ErrJsonData)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.codice").value(400))
                 .andExpect(jsonPath("$.messaggio").value("Il campo Descrizione deve avere un numero di caratteri compreso tra 6 e 80"))
@@ -255,9 +260,9 @@ class ArticoliControllerTest {
     {
 
         mockMvc.perform(MockMvcRequestBuilders.put(ApiBaseUrl + "/modifica")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(JsonDataMod)
-                        .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonDataMod)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.code").value("200 OK"))
                 .andExpect(jsonPath("$.message").value("Modifica Articolo 1234666 Eseguita Con Successo"))
@@ -288,9 +293,9 @@ class ArticoliControllerTest {
     public void testErrUpdArticolo() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.put(ApiBaseUrl + "/modifica")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(ErrJsonDataMod)
-                        .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ErrJsonDataMod)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.codice").value(404))
                 .andExpect(jsonPath("$.messaggio").value("Articolo 123467 non presente in anagrafica! Impossibile utilizzare il metodo PUT"))
@@ -302,7 +307,7 @@ class ArticoliControllerTest {
     public void testDelArticolo() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.delete(ApiBaseUrl + "/elimina/1234666")
-                        .accept(MediaType.APPLICATION_JSON))
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("200 OK"))
                 .andExpect(jsonPath("$.message").value("Eliminazione Articolo 1234666 Eseguita Con Successo"))
@@ -321,5 +326,14 @@ class ArticoliControllerTest {
                 .andExpect(jsonPath("$.codice").value(404))
                 .andExpect(jsonPath("$.messaggio").value("Articolo 1234699 non presente in anagrafica!"))
                 .andDo(print());
+    }
+
+    @Test
+    @Order(14)
+    void testGetAll() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get(ApiBaseUrl + "/cerca"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 }

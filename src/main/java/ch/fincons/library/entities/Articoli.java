@@ -52,5 +52,5 @@ public class Articoli  implements Serializable
 		this.prezzo = prezzo;
 		this.dataStampa = dataStampa;
 	}
-	
+
 }
