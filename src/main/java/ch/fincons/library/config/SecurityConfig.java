@@ -40,17 +40,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.csrf().disable()
         .authorizeRequests()
         .antMatchers(USER_MATCHER).hasAnyRole("USER")
         .antMatchers(ADMIN_MATCHER).hasAnyRole("ADMIN")
+        .antMatchers("/**").permitAll()  // permit all the routers after swagger-ui.html
         .anyRequest().authenticated()
         .and()
         .httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint())
         .and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
     }
 
     @Bean
