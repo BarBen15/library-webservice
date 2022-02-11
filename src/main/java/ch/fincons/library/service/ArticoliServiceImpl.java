@@ -1,4 +1,4 @@
-package ch.fincons.library.exception.service;
+package ch.fincons.library.service;
 
 import ch.fincons.library.entities.Articoli;
 import ch.fincons.library.repository.ArticoliRepository;

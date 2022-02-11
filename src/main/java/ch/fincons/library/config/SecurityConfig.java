@@ -1,6 +1,6 @@
 package ch.fincons.library.config;
-
-import ch.fincons.library.exception.service.CustomUserDetailsService;
+/*
+import ch.fincons.library.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -63,4 +65,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     {
         web.ignoring().antMatchers(AUTH_WHITELIST);
     }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 }
+*/

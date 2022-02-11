@@ -4,7 +4,7 @@ import ch.fincons.library.entities.Articoli;
 import ch.fincons.library.exception.BindingException;
 import ch.fincons.library.exception.DuplicateException;
 import ch.fincons.library.exception.NotFoundException;
-import ch.fincons.library.exception.service.ArticoliService;
+import ch.fincons.library.service.ArticoliService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.annotations.*;

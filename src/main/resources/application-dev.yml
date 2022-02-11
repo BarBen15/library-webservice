@@ -15,12 +15,18 @@ spring:
 server:
   port: 8081
 
+# ==============================================================
+# = Parametri Sicurezza JWT
+# ==============================================================
+jwt:
+  secret: 123Stella
+
 logging:
-  file: application-debug.log
+  file: logs/application-debug.log
   pattern:
     console: "%d %-5level %logger : %msg%n"
     file: "%d %-5level [%thread] %logger : %msg%n"
   level:
     org.springframework.web: ERROR
     ch.fincons.library.repository: DEBUG
-    org.hibernate: ERROR
+    org.springframework.security: DEBUG

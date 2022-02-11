@@ -14,11 +14,13 @@ public class UserLibraryDetails implements UserDetails {
 
     private String username;
     private String password;
+    private String email;
     private List<GrantedAuthority> authorities;
 
     public UserLibraryDetails(User user) {
-        this.username = user.getEmail();
-        this.password = "{noop}"+user.getPassword();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
         this.authorities = Arrays.stream(user.getRoles().split(","))
                                 .map(role ->"ROLE_".concat(role))
                                 .map(SimpleGrantedAuthority::new)

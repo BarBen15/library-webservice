@@ -2,8 +2,6 @@ package ch.fincons.library.service;
 
 import ch.fincons.library.entities.Articoli;
 import ch.fincons.library.entities.Barcode;
-import ch.fincons.library.exception.service.ArticoliService;
-import ch.fincons.library.exception.service.ArticoliServiceImpl;
 import ch.fincons.library.repository.ArticoliRepository;
 import org.junit.Before;
 import org.junit.Test;
