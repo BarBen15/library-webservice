@@ -14,8 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Barcode implements Serializable
-{
+public class Barcode implements Serializable {
 	private static final long serialVersionUID = 8682477643109847337L;
 
 	@Id
