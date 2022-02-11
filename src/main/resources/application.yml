@@ -16,3 +16,12 @@ spring:
       hibernate:
         format_sql: true
 
+# ==============================================================
+# = Library Logging -
+# ==============================================================
+logging:
+  file.name: logs/app-library.log
+  pattern:
+    console: "%d [%t] %-5level %logger{36} - %msg%n"
+    file: "%d [%t] %-5level %logger{36} - %msg%n"
+
