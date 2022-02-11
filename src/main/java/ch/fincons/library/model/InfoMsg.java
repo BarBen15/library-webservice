@@ -1,4 +1,4 @@
-package ch.fincons.library.controller;
+package ch.fincons.library.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

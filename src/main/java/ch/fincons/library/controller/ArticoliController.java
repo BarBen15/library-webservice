@@ -1,9 +1,11 @@
 package ch.fincons.library.controller;
 
 import ch.fincons.library.entities.Articoli;
+import ch.fincons.library.entities.User;
 import ch.fincons.library.exception.BindingException;
 import ch.fincons.library.exception.DuplicateException;
 import ch.fincons.library.exception.NotFoundException;
+import ch.fincons.library.model.InfoMsg;
 import ch.fincons.library.service.ArticoliService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -306,5 +308,12 @@ public class ArticoliController
 		
 		return new ResponseEntity<InfoMsg>(new InfoMsg(code, message), HttpStatus.OK);
 	}
-	
+
+	@GetMapping(value = "/infoUser")
+	public ResponseEntity<User> infoUser() throws  NotFoundException
+	{
+		log.info(String.format("Info Utente"));
+
+		return new ResponseEntity<User>(new User(), HttpStatus.OK);
+	}
 }
