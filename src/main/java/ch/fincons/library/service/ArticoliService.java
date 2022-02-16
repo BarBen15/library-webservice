@@ -8,6 +8,8 @@ public interface ArticoliService
 {
 	public List<Articoli> findAll();
 
+	public Articoli selByTitolo(String titolo);
+
 	public List<Articoli> selByDescrizione(String descrizione);
 	
 	public Articoli selByCodArt(String codArt);

@@ -10,6 +10,8 @@ import java.util.List;
 public interface ArticoliRepository extends JpaRepository<Articoli,String>
 {
 	Articoli findByCodArt(String codArt);
+
+	Articoli findByTitolo(String titolo);
 	
 	List<Articoli> findByDescrizioneLike(String descrizione);
 	

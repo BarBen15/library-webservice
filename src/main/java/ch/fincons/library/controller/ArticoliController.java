@@ -137,6 +137,37 @@ public class ArticoliController
 
 		return new ResponseEntity<Articoli>(articolo, HttpStatus.OK);
 	}
+
+	// ------------------- Ricerca Per Titolo ------------------------------------
+	@ApiOperation(
+			value = "Ricerca l'articolo per titolo",
+			notes = "Restituisce i dati dell'articolo in formato JSON",
+			response = Articoli.class,
+			produces = "application/json")
+	@ApiResponses(value =
+			{ 	@ApiResponse(code = 200, message = "L'articolo cercato è stato trovato!"),
+					@ApiResponse(code = 404, message = "L'articolo cercato NON è stato trovato!"),
+					@ApiResponse(code = 403, message = "Non sei AUTORIZZATO ad accedere alle informazioni"),
+					@ApiResponse(code = 401, message = "Non sei AUTENTICATO")
+			})
+	@GetMapping(value = "/cerca/titolo/{titolo}", produces = "application/json")
+	public ResponseEntity<Articoli> listArtByTitolo(@PathVariable("titolo") String titolo)  throws NotFoundException
+	{
+		log.info(String.format("****** Otteniamo l'articolo con titolo %s *******", titolo));
+
+		Articoli articolo = articoliService.selByTitolo(titolo);
+
+		if (articolo == null)
+		{
+			String ErrMsg = String.format("L'articolo con titolo %s non è stato trovato!", titolo);
+
+			log.warning(ErrMsg);
+
+			throw new NotFoundException(ErrMsg);
+		}
+
+		return new ResponseEntity<Articoli>(articolo, HttpStatus.OK);
+	}
 	
 	// ------------------- Ricerca Per Descrizione ------------------------------------
 	@ApiOperation(

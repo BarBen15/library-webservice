@@ -31,7 +31,7 @@ public class ArticoliRepositoryTest
 	@Order(1)
 	public void TestInsArticolo()
 	{
-		Articoli articolo = new Articoli("10001","Articolo di Test",50,new Date(2014, 02, 11));
+		Articoli articolo = new Articoli("10001","Animali", "Articolo di Test",50,new Date(2014, 02, 11));
 
 		Set<Barcode> Eans = new HashSet<>();
 		Eans.add(new Barcode("10000001", "Libro", articolo));

@@ -2,12 +2,16 @@
 # = DBMS MYSQL Parameters
 # ==============================================================
 spring:
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
   datasource:
     initialization-mode: always
     platform: mysql
     url: jdbc:mysql://localhost:3306/libreria
     username: root
-    password: root
+    password: Admin.01
   jpa:
     hibernate:
       ddl-auto: none
@@ -21,6 +25,12 @@ spring:
     
 server:
   port: 8082
+
+# ==============================================================
+# = Parametri Sicurezza JWT
+# ==============================================================
+jwt:
+  secret: 123Stella
 
 # ==============================================================
 # = Parametri Logging -

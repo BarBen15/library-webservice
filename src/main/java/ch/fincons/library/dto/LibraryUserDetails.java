@@ -10,14 +10,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserLibraryDetails implements UserDetails {
+public class LibraryUserDetails implements UserDetails {
 
     private String username;
     private String password;
     private String email;
     private List<GrantedAuthority> authorities;
 
-    public UserLibraryDetails(User user) {
+    public LibraryUserDetails(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.email = user.getEmail();

@@ -51,6 +51,7 @@ class ArticoliControllerTest {
     String JsonData =
             "{\n" +
                     "    \"codArt\": \"2000301\",\n" +
+                    "    \"titolo\": \"ANIMALI\",\n" +
                     "    \"descrizione\": \"PINOCCHIO\",\n" +
                     "    \"prezzo\": 65,\n" +
                     "    \"dataStampa\": \"2019-05-14\",\r\n" +
@@ -72,6 +73,8 @@ class ArticoliControllerTest {
                 //articoli
                 .andExpect(jsonPath("$.codArt").exists())
                 .andExpect(jsonPath("$.codArt").value("2000301"))
+                .andExpect(jsonPath("$.titolo").exists())
+                .andExpect(jsonPath("$.titolo").value("ANIMALI"))
                 .andExpect(jsonPath("$.descrizione").exists())
                 .andExpect(jsonPath("$.descrizione").value("PINOCCHIO"))
                 .andExpect(jsonPath("$.prezzo").exists())
@@ -162,12 +165,10 @@ class ArticoliControllerTest {
                 .andReturn();
     }
 
-
-
-
     String JsonDataIns =
             "{\r\n" +
                     "    \"codArt\": \"1234666\",\r\n" +
+                    "    \"titolo\": \"Cani\",\r\n" +
                     "    \"descrizione\": \"Articoli Unit Test Inserimento\",\r\n" +
                     "    \"prezzo\": 60,\r\n" +
                     "    \"dataStampa\": \"2019-05-14\",\r\n" +
@@ -215,6 +216,7 @@ class ArticoliControllerTest {
     String ErrJsonData =
             "{\r\n" +
                     "    \"codArt\": \"1234666\",\r\n" +
+                    "    \"titolo\": \"Cani\",\r\n" +
                     "    \"descrizione\": \"\",\r\n" +  //<<< Articolo privo di descrizione
                     "    \"prezzo\": 60,\r\n" +
                     "    \"dataStampa\": \"2019-05-14\",\r\n" +
@@ -243,6 +245,7 @@ class ArticoliControllerTest {
     String JsonDataMod =
             "{\r\n" +
                     "    \"codArt\": \"1234666\",\r\n" +
+                    "    \"titolo\": \"Cani\",\r\n" +
                     "    \"descrizione\": \"Articoli Unit Test Inserimento\",\r\n" +
                     "    \"prezzo\": 150,\r\n" + //<<< Modifica Prezzo Articolo a 150
                     "    \"dataStampa\": \"2019-05-14\",\r\n" +
@@ -277,6 +280,7 @@ class ArticoliControllerTest {
     String ErrJsonDataMod =
             "{\r\n" +
                     "    \"codArt\": \"123467\",\r\n" + //<<< Articolo NON esistente
+                    "    \"descrizione\": \"Pesci\",\r\n" +
                     "    \"descrizione\": \"Articoli Unit Test Inserimento\",\r\n" +
                     "    \"prezzo\": 150,\r\n" +
                     "    \"dataStampa\": \"2019-05-14\",\r\n" +

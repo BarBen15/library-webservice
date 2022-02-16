@@ -33,17 +33,17 @@ public class ArticoliServiceImplTest {
         Set<Barcode> barcode1 = new HashSet<>(Arrays.asList(Barcode.builder()
                                                     .barcode("1234")
                                                     .idTipoArt("libro")
-                                                    .articolo(new Articoli("1234","Articoli Test", 100, new Date(2014, 02, 11), null))
+                                                    .articolo(new Articoli("1234","Animali","Articoli Test", 100, new Date(2014, 02, 11), "DISPONIBILE", null))
                                                     .build()));
 
         Set<Barcode> barcode2 = new HashSet<>(Arrays.asList(Barcode.builder()
                                                     .barcode("12345")
                                                     .idTipoArt("CD")
-                                                    .articolo(new Articoli("12345","Articoli Test", 50, new Date(2021, 02, 11), null))
+                                                    .articolo(new Articoli("12345", "Cani","Articoli Test", 50, new Date(2021, 02, 11), "DISPONIBILE",null))
                                                     .build()));
 
-        List<Articoli> articoli = Arrays.asList(new Articoli("1234","Articoli Test", 100, new Date(2014, 02, 11), barcode1),
-                                                new Articoli("12345","Articoli Test1", 50, new Date(2021, 01, 3), barcode2));
+        List<Articoli> articoli = Arrays.asList(new Articoli("1234", "Animali","Articoli Test", 100, new Date(2014, 02, 11), "DISPONIBILE", barcode1),
+                                                new Articoli("12345","Cani","Articoli Test1", 50, new Date(2021, 01, 3), "DISPONIBILE", barcode2));
 
 
         Mockito.when(articoliRepository.findAll()).thenReturn(articoli);
@@ -54,6 +54,10 @@ public class ArticoliServiceImplTest {
         assertTrue(articoliService.findAll().size() == 2);
         assertEquals("1234", artServ.get(0).getCodArt());
         
+    }
+
+    @Test
+    public void selByTitolo() {
     }
 
     @Test

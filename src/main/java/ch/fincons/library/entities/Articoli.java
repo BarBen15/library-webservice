@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,10 @@ public class Articoli  implements Serializable
 	@NotNull(message = "{NotNull.Articoli.codArt.Validation}")
 	@ApiModelProperty(notes = "Il Codice Interno Univoco dell'Articolo")
 	private String codArt;
+
+	@Column(name = "TITOLO")
+	@Size(min = 6, max = 50, message = "{Size.Articoli.titolo.Validation}")
+	private String titolo;
 	
 	@Column(name = "DESCRIZIONE")
 	@Size(min = 6, max = 80, message = "{Size.Articoli.descrizione.Validation}")
@@ -40,13 +45,17 @@ public class Articoli  implements Serializable
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_STAMPA")
 	private Date dataStampa;
+
+	@Transient
+	private String stato;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "articolo", orphanRemoval = true)
 	@JsonManagedReference
 	private Set<Barcode> barcode = new HashSet<>();
 	
-	public Articoli(String codArt, String descrizione, Integer prezzo, Date dataStampa)
+	public Articoli(String codArt, String titolo, String descrizione, Integer prezzo, Date dataStampa)
 	{
+		this.titolo = titolo;
 		this.codArt = codArt;
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;

@@ -1,7 +1,7 @@
 package ch.fincons.library.service;
 
 
-import ch.fincons.library.dto.UserLibraryDetails;
+import ch.fincons.library.dto.LibraryUserDetails;
 import ch.fincons.library.entities.User;
 import ch.fincons.library.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +22,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 () -> new UsernameNotFoundException("not found" + username)
         );
 
-        return new UserLibraryDetails(user);
+        return new LibraryUserDetails(user);
     }
 }
